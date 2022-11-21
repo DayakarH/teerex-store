@@ -45,7 +45,6 @@ const ProductsList = () => {
             ? productsCtx.filteredProducts.map(product => <Product key={product.id} details={product} />)
             : <p>No products match selected Filters</p>
     }
-    // console.log(productsCtx.filteredProducts);
 
     return (
         <StyledSection>

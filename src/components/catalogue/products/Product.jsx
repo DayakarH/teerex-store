@@ -96,7 +96,6 @@ const Product = ({ details }) => {
     const removeItemFromCartHandler = () => {
         cartCtx.removeItem(id);
     }
-    console.log(cartCtx);
     return (
         <StyledProduct>
             <img src={url} alt={title} />

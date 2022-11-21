@@ -22,7 +22,6 @@ const cartReducer = (state, { type, payload }) => {
         } else {
             updatedItems = state.items.concat(payload);
         }
-        console.log(state.total, payload.price);
         return {
             ...state,
             items: updatedItems,
@@ -39,7 +38,6 @@ const cartReducer = (state, { type, payload }) => {
         if (itemGettingReduced.quantity === 1) {
             updatedItems = state.items.filter(item => item.id !== payload);
         } else {
-            console.log('first');
             const updatedItem = {
                 ...itemGettingReduced,
                 quantity: itemGettingReduced.quantity - 1,
@@ -65,7 +63,6 @@ const initialCartState = {
 }
 const initialCartData = () => {
     const cartData = localStorage.getItem('cartData');
-    console.log(cartData)
     return cartData ? JSON.parse(cartData) : initialCartState
 }
 

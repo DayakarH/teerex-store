@@ -30,7 +30,6 @@ const productsReducer = (state, { type, payload }) => {
                 }
             }
         case ACTIONS.SET_FILTER:
-            console.log(payload);
             const { category, filter, isChecked } = payload;
             const currentFilters = { ...state.filters };
             let currentNumberOfSelectedFilters = state.numOfSelectedFilters;
@@ -53,7 +52,6 @@ const productsReducer = (state, { type, payload }) => {
                 filteredProducts: []
             }
         case ACTIONS.FILTER_PRODUCTS:
-            console.log(state);
             let products = state.allProducts;
             if (state.numOfSelectedFilters > 0) {
                 const { filters } = state;
