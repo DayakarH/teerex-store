@@ -87,7 +87,7 @@ const Search = () => {
             <StyledForm onSubmit={formSubmitHandler}>
                 <div className="form-group">
                     <label className="visually-hidden" htmlFor='search'>Search:</label>
-                    <input ref={userInputRef} type="text" placeholder='Search here' id='search' autoCapitalize="characters" onChange={inputChangeHandler} />
+                    <input ref={userInputRef} type="text" placeholder='Search here' id='search' onChange={inputChangeHandler} />
                 </div>
                 <button type='submit'>
                     <img src={search} alt="search" />
