@@ -13,7 +13,7 @@ const StyledFiltersDialog = styled.dialog`
     top:0;
     left:0;
     z-index:2147483647;
-    min-height:100%;
+    height:100vh;
     width: 100%;
     max-width:600px;
 	margin-inline: auto;
