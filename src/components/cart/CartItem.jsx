@@ -64,7 +64,7 @@ const CartItem = ({ itemDetails }) => {
     const addItemToCartHandler = () => {
         if (availableStock === quantity) {
             setQuantityExceeded(true);
-            setNotificationMsg(`Only ${quantity} units are available`);
+            setNotificationMsg(`Only ${availableStock} ${availableStock > 1 ? 'units' : 'unit'} available`);
         } else {
             cartCtx.addItem({
                 id,
