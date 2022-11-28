@@ -22,6 +22,7 @@ const StyledCart = styled.div`
 const Cart = () => {
     const cartRef = useRef();
     const cartCtx = useContext(CartContext);
+    console.log(cartCtx);
     const displayCartHandler = () => {
         cartRef.current.showModal();
     }

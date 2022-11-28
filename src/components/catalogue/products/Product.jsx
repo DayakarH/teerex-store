@@ -1,19 +1,20 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { CartContext } from '@store/Cart-Context';
 import EditQuantityButtons from './EditQuantityButtons';
+import Notification from '@components/ui/Notification';
 import styled from '@emotion/styled';
 
-const StyledProduct = styled.article`
+const StyledProduct = styled.li`
     background-color: #f8f9fa;
     font-family: 'Cairo', sans-serif;
     font-weight:400;
-    min-height:300px;
     padding: 1em;
     box-shadow: var(--shadow-elevation-low);
     border-radius: 2em 2em;
     transition: scale 350ms ease-out, opacity 350ms ease-in-out;
     display: grid;
-    gap: .3em;
+    gap: .2em;
+    min-height:300px;
     grid-template-columns: repeat(2, minmax(0,1fr));
     grid-template-rows: 3fr 1.2fr .8fr;
     grid-template-areas:
@@ -30,6 +31,7 @@ const StyledProduct = styled.article`
     & > img{
         grid-area:img;
         border-radius:1em;
+        aspect-ratio: 1 / 1;
         /* filter: drop-shadow(0px 0px -7px rgba(0 0 0 / 30%)); */
     }
 
@@ -46,6 +48,7 @@ const StyledProduct = styled.article`
     & > .btn--group{
         grid-area: button;
         font-family: 'Montserrat', sans-serif;
+        position:relative;
 
         & > *{
             width: 100%;
@@ -75,27 +78,49 @@ const StyledProduct = styled.article`
 `;
 
 const Product = ({ details }) => {
-    const { id, name: title, price, imageURL: url, gender } = details;
+    const { id, name: title, price, imageURL: url, gender, quantity: availableStock } = details;
     const cartCtx = useContext(CartContext);
+    const [quantityExceeded, setQuantityExceeded] = useState(false);
+    const [notificationMsg, setNotificationMsg] = useState('');
     const itemAlreadyInCart = cartCtx.items.some(item => item.id === id);
     let unitsInCart;
     if (itemAlreadyInCart) {
         unitsInCart = cartCtx.items.filter(item => item.id === id)[0].quantity;
     }
+
     const addItemToCartHandler = () => {
-        cartCtx.addItem({
-            id,
-            gender,
-            title,
-            price,
-            image: url,
-            quantity: 1
-        })
+        if (unitsInCart && unitsInCart === availableStock) {
+            setQuantityExceeded(true);
+            setNotificationMsg(`Only ${availableStock} ${availableStock > 1 ? 'units' : 'unit'} available`);
+        } else {
+            cartCtx.addItem({
+                id,
+                gender,
+                title,
+                price,
+                image: url,
+                availableStock,
+                quantity: 1
+            })
+        }
     }
 
     const removeItemFromCartHandler = () => {
         cartCtx.removeItem(id);
     }
+
+    useEffect(() => {
+        let timerID;
+        if (quantityExceeded) {
+            timerID = setTimeout(() => {
+                setQuantityExceeded(false);
+                setNotificationMsg('')
+            }, 4000)
+        }
+        return (() => { clearTimeout(timerID) })
+    }, [quantityExceeded])
+
+
     return (
         <StyledProduct>
             <img src={url} alt={title} />
@@ -112,6 +137,7 @@ const Product = ({ details }) => {
                         unitsInCart={unitsInCart}
                     />
                 }
+                {quantityExceeded && <Notification msg={notificationMsg} />}
             </div>
         </StyledProduct>
     )

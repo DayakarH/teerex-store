@@ -4,32 +4,24 @@ import CartItem from './CartItem';
 import styled from '@emotion/styled';
 
 const StyledCartDetails = styled.dialog`
-        --shadow-color: 209deg 12% 30%;
         display:block;
         position: fixed;
         inset: 0 0 0 auto;
-        z-index:2147483647;
         min-height: 100vh;
         min-width:45%;
         border:none;
         overflow-y:hidden;
-
-
-        box-shadow:
-            -0.7px 0.7px 1.1px hsl(var(--shadow-color) / 0.36),
-            -2.2px 2.2px 3.5px -0.8px hsl(var(--shadow-color) / 0.36),
-            -5.4px 5.4px 8.6px -1.7px hsl(var(--shadow-color) / 0.36),
-            -13.2px 13.2px 21px -2.5px hsl(var(--shadow-color) / 0.36);
+        box-shadow: var(--shadow-elevation-high);
         transition: opacity 500ms ease;
 
         &:not([open]){
             pointer-events:none;
             opacity:0;
-            animation: var(--animation-slide-out-right);
+            animation: var(--animation-slide-out-right) 500ms ease-in forwards;
 
         }
         &[open]{
-            animation: var(--animation-slide-in-right);
+            animation: var(--animation-slide-in-right) 500ms ease-out forwards;
         }
 
         @media screen and (max-width:900px){
@@ -42,9 +34,11 @@ const StyledCartDetails = styled.dialog`
             & ul{
             overflow:auto;
             max-height:60vh;
-            scrollbar-gutter: stable;
-            -webkit-scrollbar-width:thin;
-            scrollbar-width:thin;
+            list-style:none;
+
+                & li{
+                    margin-block-end: 2rem;
+                }
             }
 
             & .cta{
@@ -87,7 +81,7 @@ const CartDetails = ({ items, total }, ref) => {
     if (items.length) {
         content = <>
             <ul>
-                {items.map(item => <CartItem key={item.id} id={item.id} url={item.image} title={item.title} price={item.price} gender={item.gender} />)}
+                {items.map(item => <CartItem key={item.id} itemDetails={item} />)}
             </ul>
             <div className="cta">
                 <div className="total">

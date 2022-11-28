@@ -90,9 +90,9 @@ const initialState = {
 }
 
 
-const ProductsContext = createContext(initialState);
+export const ProductsContext = createContext(initialState);
 
-export const ProductsContextProvider = ({ children }) => {
+const ProductsContextProvider = ({ children }) => {
 
     const [productsState, dispatch] = useReducer(productsReducer, initialState);
 
@@ -129,4 +129,4 @@ export const ProductsContextProvider = ({ children }) => {
     )
 }
 
-export default ProductsContext;
+export default ProductsContextProvider;

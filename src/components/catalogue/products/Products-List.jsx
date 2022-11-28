@@ -1,15 +1,16 @@
 import { useContext, useEffect, useState } from 'react';
 import useHTTPReq from '@hooks/useHTTPReq.hooks';
-import ProductsContext from '@store/Products-Provider';
+import { ProductsContext } from '@store/Products-Provider';
 import styled from '@emotion/styled';
 import Product from './Product';
 import LoadingSpinner from '@ui/LoadingSpinner';
 
-const StyledSection = styled.section`
-    & > article{
-        margin-block-end: 2rem;
-    }
+const StyledProductsList = styled.ul`
+    list-style:none;
 
+    & > li{
+        margin-block-end: 5rem;
+    }
     /* &:has(article:hover) article:not(:hover){
         scale:.8;
         opacity:.7;
@@ -17,8 +18,11 @@ const StyledSection = styled.section`
 
        @media screen and (min-width:600px){
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(225px,1fr));
-        gap: 2em;
+        grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+        gap: 3em;
+        & > li{
+        margin-block-end: 0;
+    }
     }
 `;
 
@@ -37,8 +41,9 @@ const ProductsList = () => {
     let content = products.map(product => <Product key={product.id} details={product}
     />);
     if (productsCtx.userSearching) {
-        content = productsCtx.searchedProducts.map(product => <Product key={product.id} details={product}
-        />)
+        content = productsCtx.searchedProducts.length
+            ? productsCtx.searchedProducts.map(product => <Product key={product.id} details={product} />)
+            : <p>No products match entered search term</p>
     }
     if (productsCtx.numOfSelectedFilters > 0) {
         content = productsCtx.filteredProducts.length
@@ -47,10 +52,10 @@ const ProductsList = () => {
     }
 
     return (
-        <StyledSection>
+        <StyledProductsList>
             {isLoading && <LoadingSpinner />}
             {content}
-        </StyledSection>
+        </StyledProductsList>
     )
 }
 

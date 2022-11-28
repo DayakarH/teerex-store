@@ -12,6 +12,7 @@ const useHTTPReq = () => {
         setError(null)
         try {
             const res = await axios.get(END_POINT);
+            //adding a PriceCategory prop to each product to make things easier for filtration
             const updatedProducts = addPriceCategoryToProducts(res.data);
             applyData(updatedProducts);
         } catch {

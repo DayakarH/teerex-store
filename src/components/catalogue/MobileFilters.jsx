@@ -13,7 +13,7 @@ const StyledFiltersDialog = styled.dialog`
     top:0;
     left:0;
     z-index:2147483647;
-    min-height:100vh;
+    min-height:100%;
     width: 100%;
     max-width:600px;
 	margin-inline: auto;
@@ -23,11 +23,11 @@ const StyledFiltersDialog = styled.dialog`
     &:not([open]){
             pointer-events:none;
             opacity:0;
-            animation: var(--animation-slide-out-top);
+            animation: var(--animation-slide-out-top) 500ms ease-out forwards;
 
         }
         &[open]{
-            animation: var(--animation-slide-in-bottom);
+            animation: var(--animation-slide-in-bottom) 500ms ease-in forwards;
         }
 
     & .close{

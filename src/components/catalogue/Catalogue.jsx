@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import Search from './Search';
 import ProductsList from './products/Products-List';
 import AsideFilters from './Filters';
-import { ProductsContextProvider } from '@store/Products-Provider';
 
 const StyledCatalogue = styled.div`
     & > .container{
@@ -23,16 +22,14 @@ const StyledCatalogue = styled.div`
 
 const Catalogue = () => {
     return (
-        <ProductsContextProvider>
-            <StyledCatalogue>
-                <Search />
-                <div className="container">
+        <StyledCatalogue>
+            <Search />
+            <div className="container">
 
-                    <AsideFilters />
-                    <ProductsList />
-                </div>
-            </StyledCatalogue>
-        </ProductsContextProvider>
+                <AsideFilters />
+                <ProductsList />
+            </div>
+        </StyledCatalogue>
     )
 }
 

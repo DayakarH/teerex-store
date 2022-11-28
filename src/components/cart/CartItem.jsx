@@ -1,5 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { CartContext } from '@store/Cart-Context';
+import { ProductsContext } from '@store/Products-Provider';
+import Notification from '@components/ui/Notification';
 import styled from '@emotion/styled';
 import EditQuantityButtons from '@components/catalogue/products/EditQuantityButtons';
 
@@ -38,6 +40,7 @@ const StyledCartItem = styled.li`
             }
             & .manageQty{
                 display:grid;
+                position: relative;
                 grid-auto-flow:column;
                 grid-template-columns: 2fr 3fr;
                 padding-inline: 1em;
@@ -53,27 +56,42 @@ const StyledCartItem = styled.li`
 
 `;
 
-const CartItem = ({ id, url, title, price, gender }) => {
+const CartItem = ({ itemDetails }) => {
+    const { id, image: url, title, price, gender, quantity, availableStock } = itemDetails;
     const cartCtx = useContext(CartContext);
-    const itemAlreadyInCart = cartCtx.items.some(item => item.id === id);
-    let unitsInCart;
-    if (itemAlreadyInCart) {
-        unitsInCart = cartCtx.items.filter(item => item.id === id)[0].quantity;
-    }
+    const [quantityExceeded, setQuantityExceeded] = useState(false);
+    const [notificationMsg, setNotificationMsg] = useState('');
     const addItemToCartHandler = () => {
-        cartCtx.addItem({
-            id,
-            gender,
-            title,
-            price,
-            image: url,
-            quantity: 1
-        })
+        if (availableStock === quantity) {
+            setQuantityExceeded(true);
+            setNotificationMsg(`Only ${quantity} units are available`);
+        } else {
+            cartCtx.addItem({
+                id,
+                gender,
+                title,
+                price: price / quantity,
+                image: url,
+                availableStock,
+                quantity: 1
+            })
+        }
     }
 
     const removeItemFromCartHandler = () => {
         cartCtx.removeItem(id);
     }
+
+    useEffect(() => {
+        let timerID;
+        if (quantityExceeded) {
+            timerID = setTimeout(() => {
+                setQuantityExceeded(false);
+            }, 4000)
+        }
+        return (() => { clearTimeout(timerID) })
+    }, [quantityExceeded])
+
     return (
         <StyledCartItem>
             <div className='product'>
@@ -82,7 +100,8 @@ const CartItem = ({ id, url, title, price, gender }) => {
                     <header className='title'>{gender}'s {title}</header>
                     <div className="manageQty">
                         <p>Qty:</p>
-                        <EditQuantityButtons onAdd={addItemToCartHandler} onReduce={removeItemFromCartHandler} unitsInCart={unitsInCart} />
+                        <EditQuantityButtons onAdd={addItemToCartHandler} onReduce={removeItemFromCartHandler} unitsInCart={quantity} />
+                        {quantityExceeded && <Notification msg={notificationMsg} />}
                     </div>
                 </div>
             </div>

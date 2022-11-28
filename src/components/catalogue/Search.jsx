@@ -1,5 +1,5 @@
-import React, { useState, useRef, useContext } from 'react';
-import ProductsContext from '@store/Products-Provider';
+import React, { useRef, useContext } from 'react';
+import { ProductsContext } from '@store/Products-Provider';
 import styled from '@emotion/styled';
 import search from '@assets/search.svg';
 import filter from '@assets/filter.svg';

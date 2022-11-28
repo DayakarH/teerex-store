@@ -8,12 +8,12 @@ const StyledHeader = styled.header`
     margin-block-end: 2rem;
     position:sticky;
     top:0;
+    z-index:1;
     padding-block: .8em;
 
     & .container{
     display: flex;
     justify-content: space-between;
-
     }
 `;
 
