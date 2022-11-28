@@ -29,7 +29,7 @@ const Cart = () => {
     return (
         <>
             <StyledCart onClick={displayCartHandler}>
-                <img src={cart} />
+                <img src={cart} alt='cart' loading='eager' />
                 <sup>{cartCtx.totalItems > 0 ? cartCtx.totalItems : ''}</sup>
             </StyledCart>
             <CartDetails ref={cartRef} items={cartCtx.items} total={cartCtx.total} />
