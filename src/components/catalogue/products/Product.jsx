@@ -123,7 +123,7 @@ const Product = ({ details }) => {
 
     return (
         <StyledProduct>
-            <img src={url} alt={title} />
+            <img src={url} alt={title} loading='lazy' />
             <div className='details'>
                 <p>{title} ({gender}'s)</p>
                 <p>Rs. {price}</p>

@@ -95,7 +95,7 @@ const CartItem = ({ itemDetails }) => {
     return (
         <StyledCartItem>
             <div className='product'>
-                <img src={url} alt={title} width="75px" height="75px" />
+                <img src={url} alt={title} width="75px" height="75px" loading='lazy' />
                 <div className="details">
                     <header className='title'>{gender}'s {title}</header>
                     <div className="manageQty">

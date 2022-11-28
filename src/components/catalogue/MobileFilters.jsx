@@ -19,16 +19,15 @@ const StyledFiltersDialog = styled.dialog`
 	margin-inline: auto;
     transition: opacity 500ms ease;
 
-
     &:not([open]){
             pointer-events:none;
             opacity:0;
-            animation: var(--animation-slide-out-top) 500ms ease-out forwards;
+            animation: var(--animation-slide-out-top) 500ms ease-in forwards;
 
         }
-        &[open]{
-            animation: var(--animation-slide-in-bottom) 500ms ease-in forwards;
-        }
+    &[open]{
+            animation: var(--animation-slide-in-bottom) 500ms ease-out forwards;
+    }
 
     & .close{
         position: absolute;
