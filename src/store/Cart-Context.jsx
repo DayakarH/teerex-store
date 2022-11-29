@@ -7,7 +7,6 @@ const ACTIONS = {
 
 const cartReducer = (state, { type, payload }) => {
     if (type === ACTIONS['ADD_ITEM']) {
-        console.log(payload);
         const isItemAlreadyInCart = state.items.some(item => item.id === payload.id);
         let updatedItems;
         if (isItemAlreadyInCart) {
