@@ -4,10 +4,16 @@ import CartDetails from './CartDetails';
 import styled from '@emotion/styled';
 import { CartContext } from '@store/Cart-Context';
 
-const StyledCart = styled.div`
+const StyledCart = styled.button`
+    background-color: transparent;
+    border:none;
     cursor: pointer;
     color: #f8f9fa;
 
+    :focus-visible {
+	outline: 2px solid currentColor;
+	outline-offset: 2px;
+    }
     & > img{
         display:inline;
     }

@@ -27,7 +27,6 @@ const StyledProduct = styled.li`
         gap:0;
     }
 
-
     & > img{
         grid-area:img;
         border-radius:1em;

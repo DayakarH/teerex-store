@@ -22,7 +22,7 @@ const Header = () => {
         <StyledHeader>
             <div className="container">
                 <a href='/'>
-                    <img src={logo} alt="logo" />
+                    <img src={logo} alt="teerex logo" />
                 </a>
                 <Cart />
             </div>

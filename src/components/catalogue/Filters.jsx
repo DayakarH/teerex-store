@@ -19,7 +19,7 @@ const StyledAccordionContainer = styled.div`
         & button{
             background: none;
             border: none;
-            outline:none;
+            cursor: pointer;
         }
     }
 
@@ -34,7 +34,7 @@ const FilterType = ({ category, filters }) => {
         <StyledAccordionContainer>
             <div>
                 <h4>{category}</h4>
-                <button onClick={toggleHandler}><Chevron isFilterExpanded={isFilterExpanded} /></button>
+                <button onClick={toggleHandler}><Chevron isFilterExpanded={isFilterExpanded} aria-expanded='false' /></button>
             </div>
             <FiltersList filters={filters} isFilterExpanded={isFilterExpanded} filterCategory={category === 'price' ? 'priceRange' : category} />
         </StyledAccordionContainer>
@@ -65,7 +65,6 @@ export const Filters = () => {
                 category='color' />
             <FilterType
                 filters={['<= Rs. 250', 'Rs. 251 - 400', '> Rs. 400']}
-                values={[[0, 250], [250, 400], [400]]}
                 category='price' />
         </StyledFilters>
     )

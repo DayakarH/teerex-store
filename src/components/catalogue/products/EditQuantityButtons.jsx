@@ -8,7 +8,6 @@ const StyledEditQuantityButtons = styled.div`
     background-color: #E9ECEF;
     border-radius:1000vmax;
 
-
     & > p{
         place-self: center;
         font-size: var(--20px);
@@ -37,9 +36,9 @@ const StyledEditQuantityButtons = styled.div`
 const EditQuantityButtons = ({ onAdd, onReduce, unitsInCart }) => {
     return (
         <StyledEditQuantityButtons>
-            <button onClick={onReduce} className='btn btn--edit remove'>-</button>
+            <button onClick={onReduce} className='btn--edit remove' aria-label='remove one unit'>-</button>
             <p>{unitsInCart}</p>
-            <button className='btn btn--edit add' onClick={onAdd}>+</button>
+            <button className='btn--edit add' onClick={onAdd} aria-label='add one more unit'>+</button>
         </StyledEditQuantityButtons>
     )
 }

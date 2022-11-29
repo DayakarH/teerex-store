@@ -143,6 +143,13 @@ dialog::backdrop {
 	transition: background 0.5s ease;
 }
 
+.btn {
+	font-family: 'Montserrat', sans-serif;
+	cursor: pointer;
+	border-style: none;
+	border-radius: 1000vmax;
+	box-shadow: var(--shadow-elevation-medium);
+}
 .button--primary {
 	font-family: 'Montserrat', sans-serif;
 	cursor: pointer;
@@ -150,17 +157,11 @@ dialog::backdrop {
 	border-radius: 1000vmax;
 	background-color: #212529;
 	color: whitesmoke;
-	box-shadow: var(--shadow-elevation-medium);
 }
 
 .button--secondary {
-	font-family: 'Montserrat', sans-serif;
-	cursor: pointer;
-	border-style: none;
-	border-radius: 1000vmax;
 	background-color: #dee2e6;
 	color: #343a40;
-	box-shadow: var(--shadow-elevation-high);
 }
 
 @keyframes slide-in-right {
@@ -224,3 +225,8 @@ dialog::backdrop {
 	animation: var(--animation-slide-in-right) 500ms ease -in forwards,
 		var(--animation-slide-out-right) 500ms ease - out 3.5s forwards;
 }
+
+/* button:focus-visible {
+	outline: 2px solid black;
+	outline-offset: 2px;
+} */

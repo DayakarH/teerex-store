@@ -31,6 +31,10 @@ const StyledForm = styled.form`
         border: none;
         cursor: pointer;
         align-self:flex-end;
+
+        &:focus-visible{
+
+        }
     }
 `;
 const StyledMobileFilter = styled.button`

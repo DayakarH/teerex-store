@@ -10,10 +10,8 @@ const modalRoot = document.getElementById("modal-root");
 const StyledFiltersDialog = styled.dialog`
     display:block;
     position: fixed;
-    top:0;
-    left:0;
+    inset: auto 0 0 0;
     z-index:2147483647;
-    height:100vh;
     width: 100%;
     max-width:600px;
 	margin-inline: auto;
@@ -31,11 +29,10 @@ const StyledFiltersDialog = styled.dialog`
 
     & .close{
         position: absolute;
-        right:4%;
-        top: 4%;
+        right:8%;
+        top: 5%;
         background:none;
         border:none;
-        outline:none;
         cursor: pointer;
     }
 
@@ -47,8 +44,13 @@ const StyledFiltersDialog = styled.dialog`
         padding: 1em 2em 2em;
     }
     & .button--group{
-         display:flex;
-        justify-content:space-around;
+        display:flex;
+        justify-content:space-between;
+        margin-block-end: 1rem;
+
+        & button{
+            padding: 1em 1.5em;
+        }
     }
 `
 
@@ -62,13 +64,13 @@ const MobileFilters = ({ }, ref) => {
         productsCtx.resetFilters();
     }
     return (
-        createPortal(<StyledFiltersDialog ref={ref}>
+        createPortal(<StyledFiltersDialog ref={ref} aria-modal="true">
             <button className='close' onClick={closeDialogHandler}><img src={close} alt='close filters' /></button>
             <div className="wrapper">
                 <Filters />
                 <div className='button--group'>
-                    <button className="button--secondary" onClick={resetFiltersHandler}>Reset Filters</button>
-                    <button className="button--primary" onClick={closeDialogHandler}>Apply Filters</button>
+                    <button className="btn button--secondary" onClick={resetFiltersHandler}>Reset Filters</button>
+                    <button className="btn button--primary" onClick={closeDialogHandler}>Apply Filters</button>
                 </div>
             </div>
         </StyledFiltersDialog>, modalRoot)

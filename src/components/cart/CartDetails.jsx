@@ -89,8 +89,8 @@ const CartDetails = ({ items, total }, ref) => {
                     <p>Rs.{total}</p>
                 </div>
                 <div className="button-group">
-                    <button onClick={closeCartHandler} className="button--secondary">Continue shopping</button>
-                    <button className='button--primary'>Proceed to checkout</button>
+                    <button onClick={closeCartHandler} className="btn button--secondary">Continue shopping</button>
+                    <button className='btn button--primary'>Proceed to checkout</button>
                 </div>
             </div>
         </>
@@ -101,7 +101,7 @@ const CartDetails = ({ items, total }, ref) => {
         </>
     }
     return (
-        createPortal(<StyledCartDetails ref={ref}>
+        createPortal(<StyledCartDetails ref={ref} aria-modal="true">
             <div className="container wrapper">
                 {content}
             </div>
