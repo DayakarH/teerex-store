@@ -226,7 +226,7 @@ dialog::backdrop {
 		var(--animation-slide-out-right) 500ms ease - out 3.5s forwards;
 }
 
-/* button:focus-visible {
+button:focus-visible {
 	outline: 2px solid black;
 	outline-offset: 2px;
-} */
+}
