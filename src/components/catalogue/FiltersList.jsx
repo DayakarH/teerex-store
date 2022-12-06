@@ -1,5 +1,5 @@
 import React, { useRef, useContext } from 'react';
-import ProductsContext from '@store/Products-Provider';
+import { ProductsContext } from '@store/Products-Provider';
 
 import styled from '@emotion/styled';
 
@@ -33,6 +33,7 @@ const StyledFilterItem = styled.li`
 const FilterItem = ({ filter, category }) => {
     const productsCtx = useContext(ProductsContext);
     const inputChangeHandler = evt => {
+        console.log('first');
         productsCtx.setFilter({ category, filter, isChecked: evt.target.checked });
     }
     return (
