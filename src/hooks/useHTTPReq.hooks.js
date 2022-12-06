@@ -5,7 +5,7 @@ import { addPriceCategoryToProducts } from '../helpers';
 
 
 const useHTTPReq = () => {
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(null);
     const [error, setError] = useState(null);
     const fetchProducts = useCallback(async (applyData) => {
         setIsLoading(true);

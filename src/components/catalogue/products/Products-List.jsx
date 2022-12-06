@@ -38,13 +38,16 @@ const ProductsList = () => {
     useEffect(() => { productsCtx.addCatalogueToContext(products) }, [products])
 
 
-    let content = products.map(product => <Product key={product.id} details={product}
-    />);
+    let content = !isLoading && error
+        ? <p>Unable to fetch products at this time. Please try again later</p>
+        : products.map(product => <Product key={product.id} details={product} />);
+
     if (productsCtx.userSearching) {
         content = productsCtx.searchedProducts.length
             ? productsCtx.searchedProducts.map(product => <Product key={product.id} details={product} />)
             : <p>No products match entered search term</p>
     }
+
     if (productsCtx.numOfSelectedFilters > 0) {
         content = productsCtx.filteredProducts.length
             ? productsCtx.filteredProducts.map(product => <Product key={product.id} details={product} />)
