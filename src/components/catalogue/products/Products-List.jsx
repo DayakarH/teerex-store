@@ -5,22 +5,26 @@ import styled from '@emotion/styled';
 import Product from './Product';
 import LoadingSpinner from '@ui/LoadingSpinner';
 
-const StyledProductsList = styled.ul`
-    list-style:none;
+const StyledProductsList = styled.section`
 
-    & > li{
-        margin-block-end: 5rem;
+    & > article{
+        margin-block-end: 1.5rem;
     }
-    /* &:has(article:hover) article:not(:hover){
+    &:has(article:hover) article:not(:hover){
         scale:.8;
         opacity:.7;
-    } */
+    }
 
-       @media screen and (min-width:600px){
+    &:has(.no-products){
+        display: block;
+        text-align:center;
+    }
+
+    @media screen and (min-width:600px){
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
-        gap: 3em;
-        & > li{
+        gap: 2em 1.5em;
+        & > article{
         margin-block-end: 0;
     }
     }
@@ -39,23 +43,24 @@ const ProductsList = () => {
 
 
     let content = !isLoading && error
-        ? <p>Unable to fetch products at this time. Please try again later</p>
+        ? <p className='no-products'>Unable to fetch products at this time. Please try again later</p>
         : products.map(product => <Product key={product.id} details={product} />);
 
     if (productsCtx.userSearching) {
+        console.log('searched')
         content = productsCtx.searchedProducts.length
             ? productsCtx.searchedProducts.map(product => <Product key={product.id} details={product} />)
-            : <p>No products match entered search term</p>
+            : <p className='no-products'>No products match entered search term</p>
     }
 
     if (productsCtx.numOfSelectedFilters > 0) {
         content = productsCtx.filteredProducts.length
             ? productsCtx.filteredProducts.map(product => <Product key={product.id} details={product} />)
-            : <p>No products match selected Filters</p>
+            : <p className='no-products'>No products match selected Filters</p>
     }
 
     return (
-        <StyledProductsList>
+        <StyledProductsList aria-label='Products Catalogue'>
             {isLoading && <LoadingSpinner />}
             {content}
         </StyledProductsList>

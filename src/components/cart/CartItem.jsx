@@ -8,6 +8,7 @@ import EditQuantityButtons from '@components/catalogue/products/EditQuantityButt
 
 const StyledCartItem = styled.li`
     display:flex;
+    column-gap: 1em;
     justify-content:space-between;
     align-items: center;
     font-family: 'Cairo';
@@ -15,45 +16,49 @@ const StyledCartItem = styled.li`
     font-weight:500;
     margin-block-end: 2em;
 
-    & .product{
-        /* width:100%; */
+    & .product--card{
         flex:1;
         display: flex;
-        /* gap: 1em; */
         align-items: center;
+        column-gap: 1em;
+
 
         & .details{
             flex:1;
-            margin-inline:auto;
             display:flex;
             flex-direction:column;
             gap: .5em;
 
-            /* @media screen and (max-width:900px) and (min-width:600px){
-                flex-direction:row;
-                justify-content:center;
-            } */
             & .title{
-                align-self: center;
+                text-align: center;
                 font-size: var(--18px);
                 font-weight:500;
             }
             & .manageQty{
-                display:grid;
+                display:flex;
+                justify-content:center;
                 position: relative;
-                grid-auto-flow:column;
-                grid-template-columns: 2fr 3fr;
-                padding-inline: 1em;
-                column-gap:1em;
+                gap: .7em;
 
+                @media screen and (max-width:350px){
+                    flex-direction:column;
+                }
                 p {
                     place-self: center;
+                    /* flex: 1; */
+                }
+                div{
+                    flex: 1;
+                    max-width:250px;
                 }
             }
 
         }
     }
 
+    & .product--price{
+        align-self: flex-end;
+    }
 `;
 
 const CartItem = ({ itemDetails }) => {
@@ -94,7 +99,7 @@ const CartItem = ({ itemDetails }) => {
 
     return (
         <StyledCartItem>
-            <div className='product'>
+            <div className='product--card'>
                 <img src={url} alt={title} width="75px" height="75px" loading='lazy' />
                 <div className="details">
                     <header className='title'>{gender}'s {title}</header>
@@ -105,7 +110,7 @@ const CartItem = ({ itemDetails }) => {
                     </div>
                 </div>
             </div>
-            <p>Rs. {price}</p>
+            <p className='product--price'>Rs. {price}</p>
         </StyledCartItem >
     )
 }

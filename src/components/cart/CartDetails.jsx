@@ -29,13 +29,14 @@ const StyledCartDetails = styled.dialog`
         }
 
         & .wrapper{
-            margin-block: 2rem;
+            padding-block: 2rem;
 
             & ul{
             overflow:auto;
-            max-height:60vh;
+            max-height:55vh;
+            margin-block-end:1rem;
             list-style:none;
-
+            /* box-shadow: var(--shadow-elevation-low); */
                 & li{
                     margin-block-end: 2rem;
                 }
@@ -59,6 +60,10 @@ const StyledCartDetails = styled.dialog`
                     gap: 1.2rem;
                     font-size: var(--18px);
 
+                    @media screen and (min-width:600px) and (max-width:900px){
+                        flex-direction:row;
+                        justify-content:center;
+                    }
                     & button{
                         padding: .3rem .9rem;
                         transition: transform 350ms ease;
@@ -86,7 +91,7 @@ const CartDetails = ({ items, total }, ref) => {
             <div className="cta">
                 <div className="total">
                     <p>Total</p>
-                    <p>Rs.{total}</p>
+                    <p>Rs. {total}</p>
                 </div>
                 <div className="button-group">
                     <button onClick={closeCartHandler} className="btn button--secondary">Continue shopping</button>

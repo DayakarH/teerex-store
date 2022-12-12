@@ -11,7 +11,7 @@ const StyledNotification = styled.p`
     padding: .5em 1em;
     animation:
     var(--animation-reveal-top) 250ms ease-out forwards,
-    var(--animation-hide-top) 250ms ease-in 3s forwards
+    var(--animation-hide-top) 250ms ease-in 2s forwards
 `;
 
 

@@ -4,7 +4,7 @@ import EditQuantityButtons from './EditQuantityButtons';
 import Notification from '@components/ui/Notification';
 import styled from '@emotion/styled';
 
-const StyledProduct = styled.li`
+const StyledProduct = styled.article`
     background-color: #f8f9fa;
     font-family: 'Cairo', sans-serif;
     font-weight:400;
@@ -13,20 +13,16 @@ const StyledProduct = styled.li`
     border-radius: 2em 2em;
     transition: scale 350ms ease-out, opacity 350ms ease-in-out;
     display: grid;
-    gap: .2em;
-    min-height:300px;
+    row-gap: .2em;
     grid-template-columns: repeat(2, minmax(0,1fr));
-    grid-template-rows: 3fr 1.2fr .8fr;
+    grid-template-rows: max-content 1.2fr .8fr;
     grid-template-areas:
             "img img"
             "details details"
             "button button";
-
-    @media screen and (max-width:600px){
-        grid-template-rows: 4fr 1.2fr .8fr;
-        gap:0;
+    &:hover{
+        scale:1.05;
     }
-
     & > img{
         grid-area:img;
         border-radius:1em;
@@ -34,6 +30,15 @@ const StyledProduct = styled.li`
         /* filter: drop-shadow(0px 0px -7px rgba(0 0 0 / 30%)); */
     }
 
+    & button{
+        cursor: pointer;
+        border-style: none;
+        background-color:#212529;
+        color: whitesmoke;
+        padding: .7em 1em;
+	    transition: scale 300ms ease-in-out;
+        box-shadow: var(--shadow-elevation-medium);
+    }
     & .details{
         grid-area: details;
         display: flex;
@@ -60,18 +65,14 @@ const StyledProduct = styled.li`
         cursor: pointer;
 	    border-style: none;
 	    border-radius: 1000vmax;
-	    transition: scale 350ms ease-out;
         background-color:#212529;
         color: whitesmoke;
-        box-shadow: var(--shadow-elevation-medium);
-
-            &:hover {
+             &:hover {
 	            scale: 1.05;
                 }
             &:active {
 	            scale: 0.99;
             }
-
         }
     }
 `;
@@ -114,7 +115,7 @@ const Product = ({ details }) => {
             timerID = setTimeout(() => {
                 setQuantityExceeded(false);
                 setNotificationMsg('')
-            }, 4000)
+            }, 2000)
         }
         return (() => { clearTimeout(timerID) })
     }, [quantityExceeded])

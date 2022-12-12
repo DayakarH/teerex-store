@@ -83,6 +83,7 @@ const Search = () => {
         for (let word of enteredInput) {
             formattedInputArr.push(`${word[0].toUpperCase()}${word.slice(1)}`)
         };
+        console.log(formattedInputArr);
         productsCtx.searchCatalogue(formattedInputArr.join(' '));
     }
 
